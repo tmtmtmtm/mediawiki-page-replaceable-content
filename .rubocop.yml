@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.1
+
+inherit_from:
+  - https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/.rubocop_base.yml
+
+Layout/AlignHash:
+  Enabled: false

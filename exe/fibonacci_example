@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+
+require 'mediawiki/client'
+require 'mediawiki/page'
+
+client = MediaWiki::Client.new(
+  site:     'www.wikidata.org',
+  username: ENV['WIKI_USERNAME'],
+  password: ENV['WIKI_PASSWORD']
+)
+
+section = MediaWiki::Page::ReplaceableContent.new(
+  client:   client,
+  title:    'User:Mhl20/Fibonnacci test',
+  template: 'Fibonacci'
+)
+
+def fibonacci_numbers(limit)
+  numbers = []
+  i = 0
+  j = 1
+  while i <= limit
+    numbers << i
+    i = j
+    j = i + j
+  end
+  numbers
+end
+
+def wikitext_fibonacci_rows(limit)
+  fibs = fibonacci_numbers(limit)
+  "|-\n" + 0.upto(fibs.length - 1).map { |f| "| ''F''<sub>#{f}</sub>\n" }.join('') +
+    "|-\n" + fibs.map { |n| "| #{n}\n" }.join('')
+end
+
+def wikitext_fibonacci(limit)
+  "=== Some Fibonacci numbers ===\n:{| class=\"wikitable\"\n" +
+    wikitext_fibonacci_rows(limit) +
+    '|}'
+end
+
+limit = Integer(section.params[:max_fib])
+section.replace_output(
+  wikitext_fibonacci(limit),
+  "Rewrote with numbers up to #{limit}"
+)
