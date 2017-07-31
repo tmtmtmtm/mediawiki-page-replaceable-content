@@ -74,7 +74,7 @@ https://en.wikipedia.org/wiki/Fibonacci_number
 Then you could rewrite it, using the `ReplaceableContent` object
 created above, with:
 
-```
+```ruby
 def fibonacci_numbers(limit)
   numbers = []
   i, j = 0, 1
