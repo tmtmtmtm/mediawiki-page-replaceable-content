@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = '0.1.0'
   spec.authors       = ['EveryPolitician']
   spec.email         = ['team@everypolitician.org']
+  spec.licenses      = ['MIT']
 
   spec.summary       = 'Rewrite content after a template tag based on the template parameters'
   spec.homepage      = 'https://github.com/everypolitician/mediawiki-page-replaceable_content'
