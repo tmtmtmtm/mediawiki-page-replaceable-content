@@ -55,7 +55,7 @@ module MediaWiki
           \{\{
           (?<template_name>#{Regexp.quote(template)})
           (?<parameters>.*?)
-          \}\}\n
+          \}\}
           (?<after>.*)$
         /xm
       end
