@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'mediawiki-page-replaceable_content'
-  spec.version       = '0.1.1'
+  spec.version       = '0.1.2'
   spec.authors       = ['EveryPolitician']
   spec.email         = ['team@everypolitician.org']
   spec.licenses      = ['MIT']
