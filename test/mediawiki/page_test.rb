@@ -66,6 +66,15 @@ Now let\'s have a recognized template:
 |bar=Woolly Mountain Tapir
 }}Hello - this text immediately abuts the template.'.freeze
 
+WIKITEXT_NOTHING_AFTER_TERMINATOR = '{{Politician scraper comparison
+|foo=43
+|bar=Woolly Mountain Tapir
+}}
+
+Old content of the first section.
+
+<!-- OUTPUT END -->'.freeze
+
 FakeResponse = Struct.new(:body)
 
 describe 'ReplaceableContent' do
@@ -177,7 +186,6 @@ Now let\'s have a recognized template:
 New content for the first section!
 <!-- OUTPUT END succeeded -->
 
-
 But there\'s no terminating HTML comment.'
       )
       client.verify
@@ -203,7 +211,6 @@ Now let\'s have a recognized template:
 }}
 New content for the first section!
 <!-- OUTPUT END Run time: took absolutely ages -->
-
 
 But there\'s no terminating HTML comment.',
         ]
@@ -237,8 +244,7 @@ Now let\'s have a recognized template:
 |bar=Woolly Mountain Tapir
 }}
 New content here!
-<!-- OUTPUT END succeeded -->
-Hello - this text immediately abuts the template.'
+<!-- OUTPUT END succeeded -->Hello - this text immediately abuts the template.'
       )
     end
   end
@@ -264,8 +270,32 @@ Now let\'s have a recognized template:
 |bar=Woolly Mountain Tapir
 }}
 New content here!
-<!-- OUTPUT END succeeded -->
-'
+<!-- OUTPUT END succeeded -->'
+      )
+    end
+  end
+
+  describe 'existing template with nothing after the terminating comment' do
+    let(:wikitext) { WIKITEXT_NOTHING_AFTER_TERMINATOR }
+
+    it 'can return the wikitext within a section' do
+      section.existing_content.must_equal(
+        "\n\nOld content of the first section.\n"
+      )
+      client.verify
+    end
+
+    it 'can be reassembled with new content' do
+      section.reassemble_page(
+        'New content here!',
+        'succeeded'
+      ).must_equal(
+        '{{Politician scraper comparison
+|foo=43
+|bar=Woolly Mountain Tapir
+}}
+New content here!
+<!-- OUTPUT END succeeded -->'
       )
     end
   end

@@ -16,8 +16,7 @@ module MediaWiki
       def reassemble_page(new_content, run_comment = '')
         "%<before>s{{%<template_name>s%<parameters>s}}
 #{new_content}
-<!-- OUTPUT END #{run_comment} -->
-%<keep>s" % page_parts
+<!-- OUTPUT END #{run_comment} -->%<keep>s" % page_parts
       end
 
       def replace_output(new_content, run_comment = '')
@@ -73,7 +72,7 @@ module MediaWiki
         # the special HTML comment that marks the end of the previous
         # output; if it's not there we insert the new content right
         # after the template tag.
-        if after =~ /^(?<to_replace>.*?)\n<!-- OUTPUT END (?:.*?)-->\n(?<keep>.*)/m
+        if after =~ /^(?<to_replace>.*?)\n<!-- OUTPUT END (?:.*?)-->(?<keep>.*)/m
           matchdata_to_h(Regexp.last_match)
         else
           { to_replace: '', keep: after }
