@@ -3,6 +3,8 @@ require 'mediawiki_api'
 module MediaWiki
   module Page
     class ReplaceableContent
+      NAMED_TEMPLATE_PARAM_RE = /(.*?)=(.*)/m
+
       def initialize(client:, title:, template:)
         @client = client
         @title = title
@@ -31,9 +33,15 @@ module MediaWiki
         # FIXME: untemplate these using the MediaWiki API before
         # returning them.
         all_parameters.map do |p|
-          m = /(.*?)=(.*)/m.match(p)
-          [m[1].strip.to_sym, m[2]]
-        end.to_h
+          m = NAMED_TEMPLATE_PARAM_RE.match(p)
+          [m[1].strip.to_sym, m[2]] if m
+        end.compact.to_h
+      end
+
+      def anonymous_params
+        # FIXME: untemplate these using the MediaWiki API before
+        # returning them.
+        all_parameters.map { |p| NAMED_TEMPLATE_PARAM_RE =~ p ? nil : p }.compact
       end
 
       private

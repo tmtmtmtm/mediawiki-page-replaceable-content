@@ -75,6 +75,8 @@ Old content of the first section.
 
 <!-- OUTPUT END -->'.freeze
 
+WIKITEXT_SINGLE_POSITIONAL_PARAMETER = '{{Politician scraper comparison|12345}}'.freeze
+
 FakeResponse = Struct.new(:body)
 
 describe 'ReplaceableContent' do
@@ -195,6 +197,10 @@ But there\'s no terminating HTML comment.'
       section.params.must_equal(foo: '43', bar: 'Woolly Mountain Tapir')
     end
 
+    it 'has no anonymous parameters' do
+      section.anonymous_params.must_be_empty
+    end
+
     it 'will post back with the new content and an optional comment on the run' do
       client.expect(
         :edit,
@@ -297,6 +303,18 @@ New content here!
 New content here!
 <!-- OUTPUT END succeeded -->'
       )
+    end
+  end
+
+  describe 'a template with a single positional parameter' do
+    let(:wikitext) { WIKITEXT_SINGLE_POSITIONAL_PARAMETER }
+
+    it 'must return only one anonymous parameter' do
+      section.anonymous_params.must_equal(%w[12345])
+    end
+
+    it 'must not return named parameters' do
+      section.params.must_be_empty
     end
   end
 end
