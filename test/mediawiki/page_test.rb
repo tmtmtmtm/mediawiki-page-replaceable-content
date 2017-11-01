@@ -77,6 +77,10 @@ Old content of the first section.
 
 WIKITEXT_SINGLE_POSITIONAL_PARAMETER = '{{Politician scraper comparison|12345}}'.freeze
 
+WIKITEXT_NUMBERED_PARAMETERS = '{{Politician scraper comparison|1=foo|2=bar|10=baz}}'.freeze
+
+WIKITEXT_CONFUSING_PARAMETER_MIX = '{{Politician scraper comparison|id=42|12345|1=foo|baz=bar|789}}'.freeze
+
 FakeResponse = Struct.new(:body)
 
 describe 'ReplaceableContent' do
@@ -315,6 +319,38 @@ New content here!
 
     it 'must not return named parameters' do
       section.params.must_be_empty
+    end
+  end
+
+  describe 'a template with numbered parameters' do
+    let(:wikitext) { WIKITEXT_NUMBERED_PARAMETERS }
+
+    it 'returns numbered parameters' do
+      section.params.must_equal(
+        1 => 'foo',
+        2 => 'bar',
+        10 => 'baz'
+      )
+    end
+
+    it 'must not return anonymous parameters' do
+      section.anonymous_params.must_be_empty
+    end
+  end
+
+  describe 'a template with a confusing mix of parameters' do
+    let(:wikitext) { WIKITEXT_CONFUSING_PARAMETER_MIX }
+
+    it 'returns both parameters in an array' do
+      section.anonymous_params.must_equal(%w[12345 789])
+    end
+
+    it 'returns the named and numbered parameters' do
+      section.params.must_equal(
+        :id => '42',
+        1 => 'foo',
+        :baz => 'bar'
+      )
     end
   end
 end

@@ -26,6 +26,17 @@ module MediaWiki
         client.edit(title: title, text: new_wikitext)
       end
 
+      def param_key_value_array(key, value)
+        [
+          if key.strip =~ /^\d+$/
+            Integer(Regexp.last_match[0])
+          else
+            key.strip.to_sym
+          end,
+          value,
+        ]
+      end
+
       def params
         # Returns the named parameters from the template tag as a Hash
         # where the keys are symbolized versions of the parameter
@@ -34,7 +45,7 @@ module MediaWiki
         # returning them.
         all_parameters.map do |p|
           m = NAMED_TEMPLATE_PARAM_RE.match(p)
-          [m[1].strip.to_sym, m[2]] if m
+          param_key_value_array(*m.captures) if m
         end.compact.to_h
       end
 
