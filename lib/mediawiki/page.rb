@@ -5,6 +5,8 @@ module MediaWiki
     class ReplaceableContent
       NAMED_TEMPLATE_PARAM_RE = /(.*?)=(.*)/m
 
+      TemplateNotFoundError = Class.new(StandardError)
+
       def initialize(client:, title:, template:)
         @client = client
         @title = title
@@ -81,7 +83,7 @@ module MediaWiki
       def page_parts
         return @page_parts if @page_parts
         m = template_re.match(wikitext)
-        raise "The template '#{template}' was not found in '#{title}'" unless m
+        raise TemplateNotFoundError, "The template '#{template}' was not found in '#{title}'" unless m
         parts = matchdata_to_h(m)
         @page_parts = parts.merge(split_after(parts[:after]))
       end
