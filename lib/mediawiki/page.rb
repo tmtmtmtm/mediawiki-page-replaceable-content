@@ -110,8 +110,8 @@ module MediaWiki
         end
       end
 
-      def matchdata_to_h(md)
-        md.names.map(&:to_sym).zip(md.captures).to_h
+      def matchdata_to_h(matchdata)
+        matchdata.names.map(&:to_sym).zip(matchdata.captures).to_h
       end
     end
   end
