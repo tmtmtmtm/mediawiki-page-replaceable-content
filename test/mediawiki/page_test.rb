@@ -353,4 +353,14 @@ New content here!
       )
     end
   end
+
+  describe 'a page without the template' do
+    let(:wikitext) { 'no template here' }
+
+    it 'raises exception when replacing content' do
+      assert_raises MediaWiki::Page::ReplaceableContent::TemplateNotFoundError do
+        section.replace_output('New content')
+      end
+    end
+  end
 end

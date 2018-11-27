@@ -18,9 +18,7 @@ module MediaWiki
     def wrapped_client
       @wrapped_client ||= MediawikiApi::Client.new("https://#{site}/w/api.php").tap do |c|
         result = c.log_in(username, password)
-        unless result['result'] == 'Success'
-          raise "MediawikiApi::Client#log_in failed: #{result}"
-        end
+        raise "MediawikiApi::Client#log_in failed: #{result}" if result['result'] != 'Success'
       end
     end
   end
