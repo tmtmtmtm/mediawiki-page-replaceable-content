@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.5.0'
 
   spec.name          = 'mediawiki-page-replaceable_content'
-  spec.version       = '0.2.0'
+  spec.version       = '0.2.1'
   spec.authors       = ['Tony Bowden', 'Mark Longair']
   spec.email         = ['tony@tmtm.com']
   spec.licenses      = ['MIT']
