@@ -152,8 +152,15 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/everypolitician/mediawiki-page-replaceable_content
+Bug reports and pull requests are welcome on GitHub at https://github.com/tmtmtmtm/mediawiki-page-replaceable_content
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+## History
+
+This was originally developed as part of a [Wikimedia Foundation grant-funded
+project](https://meta.wikimedia.org/wiki/Grants:Project/mySociety/EveryPolitician).
+
+This version is now maintained independently by Tony Bowden.

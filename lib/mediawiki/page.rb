@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'mediawiki_api'
 
 module MediaWiki
   module Page
     class ReplaceableContent
-      NAMED_TEMPLATE_PARAM_RE = /(.*?)=(.*)/m
+      NAMED_TEMPLATE_PARAM_RE = /(.*?)=(.*)/m.freeze
 
       TemplateNotFoundError = Class.new(StandardError)
 
@@ -35,7 +37,7 @@ module MediaWiki
           else
             key.strip.to_sym
           end,
-          value,
+          value
         ]
       end
 
@@ -82,8 +84,10 @@ module MediaWiki
 
       def page_parts
         return @page_parts if @page_parts
+
         m = template_re.match(wikitext)
         raise TemplateNotFoundError, "The template '#{template}' was not found in '#{title}'" unless m
+
         parts = matchdata_to_h(m)
         @page_parts = parts.merge(split_after(parts[:after]))
       end

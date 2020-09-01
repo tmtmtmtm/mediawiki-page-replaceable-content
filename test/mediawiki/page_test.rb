@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 WIKITEXT_MULTIPLE_TERMINATED = 'Hi, here is some introductory text.
@@ -35,7 +37,7 @@ ignored because it\'s the second one on the page.
 
 Now some trailing text.
 
-'.freeze
+'
 
 WIKITEXT_SINGLE_UNTERMINATED = 'Hi, here is some introductory text.
 
@@ -46,7 +48,7 @@ Now let\'s have a recognized template:
 |bar=Woolly Mountain Tapir
 }}
 
-But there\'s no terminating HTML comment.'.freeze
+But there\'s no terminating HTML comment.'
 
 WIKITEXT_NOTHING_AFTER_TEMPLATE = 'Hi, here is some introductory text.
 
@@ -55,7 +57,7 @@ Now let\'s have a recognized template:
 {{Politician scraper comparison
 |foo=43
 |bar=Woolly Mountain Tapir
-}}'.freeze
+}}'
 
 WIKITEXT_NO_WHITESPACE_AFTER_TEMPLATE = 'Hi, here is some introductory text.
 
@@ -64,7 +66,7 @@ Now let\'s have a recognized template:
 {{Politician scraper comparison
 |foo=43
 |bar=Woolly Mountain Tapir
-}}Hello - this text immediately abuts the template.'.freeze
+}}Hello - this text immediately abuts the template.'
 
 WIKITEXT_NOTHING_AFTER_TERMINATOR = '{{Politician scraper comparison
 |foo=43
@@ -73,13 +75,13 @@ WIKITEXT_NOTHING_AFTER_TERMINATOR = '{{Politician scraper comparison
 
 Old content of the first section.
 
-<!-- OUTPUT END -->'.freeze
+<!-- OUTPUT END -->'
 
-WIKITEXT_SINGLE_POSITIONAL_PARAMETER = '{{Politician scraper comparison|12345}}'.freeze
+WIKITEXT_SINGLE_POSITIONAL_PARAMETER = '{{Politician scraper comparison|12345}}'
 
-WIKITEXT_NUMBERED_PARAMETERS = '{{Politician scraper comparison|1=foo|2=bar|10=baz}}'.freeze
+WIKITEXT_NUMBERED_PARAMETERS = '{{Politician scraper comparison|1=foo|2=bar|10=baz}}'
 
-WIKITEXT_CONFUSING_PARAMETER_MIX = '{{Politician scraper comparison|id=42|12345|1=foo|baz=bar|789}}'.freeze
+WIKITEXT_CONFUSING_PARAMETER_MIX = '{{Politician scraper comparison|id=42|12345|1=foo|baz=bar|789}}'
 
 FakeResponse = Struct.new(:body)
 
@@ -96,8 +98,8 @@ describe 'ReplaceableContent' do
 
   let(:section) do
     MediaWiki::Page::ReplaceableContent.new(
-      client: client,
-      title: 'Some Wiki page',
+      client:   client,
+      title:    'Some Wiki page',
       template: 'Politician scraper comparison'
     )
   end
@@ -210,8 +212,8 @@ But there\'s no terminating HTML comment.'
         :edit,
         nil,
         [
-          title: 'Some Wiki page',
-          text: 'Hi, here is some introductory text.
+          { title: 'Some Wiki page',
+            text:  'Hi, here is some introductory text.
 
 Now let\'s have a recognized template:
 
@@ -222,7 +224,7 @@ Now let\'s have a recognized template:
 New content for the first section!
 <!-- OUTPUT END Run time: took absolutely ages -->
 
-But there\'s no terminating HTML comment.',
+But there\'s no terminating HTML comment.' }
         ]
       )
       section.replace_output(
@@ -327,8 +329,8 @@ New content here!
 
     it 'returns numbered parameters' do
       section.params.must_equal(
-        1 => 'foo',
-        2 => 'bar',
+        1  => 'foo',
+        2  => 'bar',
         10 => 'baz'
       )
     end
@@ -347,8 +349,8 @@ New content here!
 
     it 'returns the named and numbered parameters' do
       section.params.must_equal(
-        :id => '42',
-        1 => 'foo',
+        :id  => '42',
+        1    => 'foo',
         :baz => 'bar'
       )
     end
