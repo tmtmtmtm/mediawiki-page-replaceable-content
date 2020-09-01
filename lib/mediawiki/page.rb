@@ -20,9 +20,8 @@ module MediaWiki
       end
 
       def reassemble_page(new_content, run_comment = '')
-        "%<before>s{{%<template_name>s%<parameters>s}}
-#{new_content}
-<!-- OUTPUT END #{run_comment} -->%<keep>s" % page_parts
+        format("%<before>s{{%<template_name>s%<parameters>s}}\n%<new_content>s\n<!-- OUTPUT END %<run_comment>s -->%<keep>s",
+               page_parts.merge(new_content: new_content, run_comment: run_comment))
       end
 
       def replace_output(new_content, run_comment = '')

@@ -120,7 +120,7 @@ describe 'ReplaceableContent' do
 
     it 'can be reassembled with some new content' do
       section.reassemble_page(
-        'New content for the first section!',
+        'New content for the first section is 100% accurate!',
         'succeeded'
       ).must_equal(
         'Hi, here is some introductory text.
@@ -131,7 +131,7 @@ Now let\'s have a recognized template:
 |foo=43
 |bar=Woolly Mountain Tapir
 }}
-New content for the first section!
+New content for the first section is 100% accurate!
 <!-- OUTPUT END succeeded -->
 
 And some other text here before a new template:
