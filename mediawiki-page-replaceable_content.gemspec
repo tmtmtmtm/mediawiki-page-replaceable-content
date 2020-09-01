@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
@@ -5,13 +7,13 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.5.0'
 
   spec.name          = 'mediawiki-page-replaceable_content'
-  spec.version       = '0.1.4'
-  spec.authors       = ['EveryPolitician']
-  spec.email         = ['team@everypolitician.org']
+  spec.version       = '0.2.0'
+  spec.authors       = ['Tony Bowden', 'Mark Longair']
+  spec.email         = ['tony@tmtm.com']
   spec.licenses      = ['MIT']
 
   spec.summary       = 'Rewrite content after a template tag based on the template parameters'
-  spec.homepage      = 'https://github.com/everypolitician/mediawiki-page-replaceable_content'
+  spec.homepage      = 'https://github.com/tmtm/mediawiki-page-replaceable_content'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
