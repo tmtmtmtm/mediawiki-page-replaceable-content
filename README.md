@@ -14,7 +14,7 @@ See the "Usage" section below for an example.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mediawiki-page-replaceable_content'
+gem 'mediawiki-replaceable-content'
 ```
 
 And then execute:
@@ -23,7 +23,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install mediawiki-page-replaceable_content
+    $ gem install mediawiki-replaceable-content
 
 ## Usage
 
@@ -152,7 +152,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/tmtmtmtm/mediawiki-page-replaceable_content
+Bug reports and pull requests are welcome on GitHub at https://github.com/tmtmtmtm/mediawiki-replaceable-content
 
 ## License
 
