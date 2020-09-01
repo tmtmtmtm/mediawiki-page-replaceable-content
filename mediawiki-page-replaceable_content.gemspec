@@ -2,6 +2,8 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
+  spec.required_ruby_version = '>= 2.5.0'
+
   spec.name          = 'mediawiki-page-replaceable_content'
   spec.version       = '0.1.4'
   spec.authors       = ['EveryPolitician']
