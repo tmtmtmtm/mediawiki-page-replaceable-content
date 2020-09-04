@@ -63,7 +63,7 @@ module MediaWiki
       attr_accessor :client, :title, :template
 
       def wikitext
-        @wikitext ||= client.get_wikitext(title).body
+        @wikitext ||= client.get_wikitext(title).body.dup.force_encoding('UTF-8')
       end
 
       def template_re
