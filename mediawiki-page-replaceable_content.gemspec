@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.licenses      = ['MIT']
 
   spec.summary       = 'Rewrite content after a template tag based on the template parameters'
-  spec.homepage      = 'https://github.com/tmtm/mediawiki-replaceable-content'
+  spec.homepage      = 'https://github.com/tmtmtmtm/mediawiki-replaceable-content'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
